@@ -1,6 +1,8 @@
 
 import React from 'react';
-import Content from './content';
+import Home from './pages/home';
+import Content from './pages/content';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 
 
@@ -8,9 +10,13 @@ import Content from './content';
 
 function App() {
   return (
-    <div className="App">
-      <Content />
-    </div>
+    <Router>
+      <div className="App">
+        <p>Routing</p>
+      </div>
+      <Route path="/" exact component={Home} />
+      <Route path="/content" component={Content} />
+    </Router>
   );
 }
 
