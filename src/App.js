@@ -1,42 +1,28 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Modal } from './components/Modal';
-import { GlobalStyle } from './globalStyles';
+import React from 'react';
+import DeviceOrientation, { Orientation } from 'react-screen-orientation'
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
 
-const Button = styled.button`
-  min-width: 100px;
-  padding: 16px 32px;
-  border-radius: 4px;
-  border: none;
-  background: #141414;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-`;
 
 function App() {
-  const [showModal, setShowModal] = useState(false)
-
-  const openModal = () => {
-    setShowModal(prev => !prev);
-  };
 
   return (
 
-    <>
-      <Container>
-        <Button onClick={openModal}>I'm a Modal</Button>
-        <Modal showModal={showModal} setShowModal={setShowModal} />
-        <GlobalStyle />
-      </Container>
-    </>
+    <div>
+      <DeviceOrientation lockOrientation={'portrait'}>
+        {/* Will only be in DOM in landscape */}
+        <Orientation orientation='portrait' alwaysRender={false}>
+          <div>
+            <p>Only visible in landscape</p>
+          </div>
+        </Orientation>
+        {/* Will stay in DOM, but is only visible in portrait */}
+        <Orientation orientation='landscape'>
+          <div>
+            <p>Please rotate your device</p>
+          </div>
+        </Orientation>
+      </DeviceOrientation>
+    </div>
 
   );
 }
